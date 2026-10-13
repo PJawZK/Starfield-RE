@@ -4,80 +4,238 @@ Status: reference world / ocean-world concept
 
 ## Purpose
 
-Thalassa explores a water-dominated planet without simply reproducing a tropical Earth archipelago. The visual identity should come from vertical ocean geology, atmospheric moisture, unusual coastal forms, and settlement logistics.
+Thalassa is the ocean-world benchmark. It should prove that a planet dominated by familiar liquid water can still feel genuinely alien through vertical geology, wave climate, atmospheric moisture, ecology, and settlement logistics.
 
-## Core physical rules
+It must not read as a tropical Earth archipelago with replacement plants.
 
-- global ocean with sparse exposed land;
-- strong tides and storm systems;
-- low continents, tall volcanic or uplifted island chains;
-- deep submerged fracture zones;
-- dense cloud cover broken by short clear windows;
-- coastal ecology adapted to extreme salinity/mineral chemistry.
+## One-sentence pitch
+
+Thalassa is a storm-battered ocean planet where sparse volcanic land rises as narrow black spines, flooded calderas, sea arches and cliff rings above a deep global ocean, forcing both native life and human settlements to cling to vertical rock and sheltered water.
+
+## Physical baseline
+
+Working assumptions:
+
+- global or near-global liquid-water ocean;
+- relatively little permanent exposed land;
+- moderate gravity;
+- atmosphere dense enough to sustain vigorous weather and cloud systems;
+- active volcanism and tectonic uplift continue to create isolated island chains;
+- high wave energy and strong tides aggressively erode exposed land;
+- deep water dominates the planetary heat and nutrient transport system;
+- coastal and marine ecosystems contain most of the biomass;
+- frequent cloud, rain, spray and mist reduce long-range surface visibility;
+- clear weather windows occur but should not define the world's identity.
+
+Exact ocean salinity, atmospheric pressure and chemistry remain adjustable until mapped onto an in-game host planet.
+
+## Fluid and phase-state rules
+
+The dominant surface liquid is water.
+
+The ocean is not exotic merely because the planet is alien. Alienness must come from what geology, chemistry, weather and biology do with a global ocean.
+
+Allowed phenomena include:
+
+- deep open ocean;
+- powerful surf and storm surge;
+- flooded calderas;
+- tidal channels;
+- sea caves and flooded lava tubes;
+- heavy spray and aerosol layers;
+- geothermal hot-water zones near active volcanic systems;
+- localized hypersaline or mineral-rich basins where evaporation/geology supports them.
+
+Avoid decorative unexplained colored liquids. Unusual water coloration must have a material, biological or optical cause.
+
+## Geological history model
+
+Thalassa's exposed land is temporary on geological timescales.
+
+1. submarine volcanism and tectonic uplift create steep island edifices;
+2. some volcanoes breach the ocean surface as narrow, high-relief islands;
+3. caldera collapse creates ring-shaped basins and partially flooded interiors;
+4. waves exploit fractures and lava tubes, carving arches, stacks and sea caverns;
+5. weaker volcanic material erodes rapidly while harder dikes and cores remain as tall spines;
+6. repeated collapse creates broken rings, isolated pillars and submerged shelves;
+7. new volcanic growth and old coastal destruction continue simultaneously.
+
+The result is a planet where coastlines look actively unfinished.
 
 ## Shape language
 
-Primary form: tall narrow island spines and broken ocean cliffs.
+Primary form: tall narrow volcanic island spines and broken caldera rims.
 
-Secondary form: ring-like reef/mineral shelves and undercut coastlines.
+Secondary form: sea arches, offshore stacks, vertical dikes, undercut cliffs and partial ring islands.
 
-Detail form: layered wet mineral surfaces, porous reef-like growths, wind-cut ledges.
+Detail form: wet layered basalt/mineral surfaces, erosion grooves, porous reef/mineral crusts, spray-polished ledges.
 
-Void form: sea caves, blowholes, arches, flooded calderas, vertical shafts.
+Void form: sea caves, blowholes, flooded shafts, arch tunnels, collapsed lava tubes and caldera entrances.
 
-Directional bias: vertical relief emerging sharply from broad horizontal water planes.
+Directional bias: strong vertical forms rising abruptly from broad horizontal ocean planes.
 
 ## Horizon read
 
-The world should read as huge areas of open water interrupted by dramatic isolated forms rather than familiar beaches and rolling green islands.
+The world should read as enormous open water interrupted by sparse, dramatic forms.
 
-Cloud and mist should reveal island silhouettes gradually, with tall structures appearing before shorelines become visible.
+At long range:
+
+- tall rock spines appear before shorelines;
+- cloud and spray partially obscure island bases;
+- isolated stacks and broken caldera rims create recognizable silhouettes;
+- very little low rolling coastline is visible.
+
+It must remain distinctive under flat overcast light and in grayscale.
+
+## Ocean and wave climate
+
+The sea is an active environmental system rather than scenery.
+
+Useful visual/gameplay states:
+
+- long-period ocean swell in ordinary weather;
+- high surf around exposed windward cliffs;
+- relatively calm lee-side channels;
+- storm surge into sea caves and lower industrial structures;
+- spray plumes visible around stacks and arches;
+- mist banks generated by surf and temperature differences;
+- tidal exposure/submergence of some shelves and passages if technically feasible.
+
+A future implementation should investigate whether wave state can have meaningful collision or traversal consequences. This is not assumed yet.
 
 ## Ecology
 
-Most biomass is marine or coastal.
+Most biomass is marine or attached to vertical coastal structures.
 
-Possible forms:
+### Marine life
 
-- floating colonial mats;
-- cliff-attached filter organisms;
-- mineral-shelled tidal growths;
-- giant kelp-equivalent structures with non-terrestrial branching;
-- airborne scavengers following storm fronts.
+Potential structural families:
 
-Terrestrial-looking forests should be rare or absent.
+- broad colonial floating mats in sheltered water;
+- large filter-feeding organisms suspended below surface layers;
+- reef-like mineral-shell colonies on submerged volcanic shelves;
+- long flexible photosynthetic structures anchored in deeper channels;
+- pelagic organisms following nutrient upwelling zones.
+
+### Coastal life
+
+- cliff-attached filter organisms living in spray zones;
+- compact crust-like growth on exposed windward rock;
+- larger porous colonies on sheltered vertical walls;
+- organisms using tidal cavities rather than terrestrial soil.
+
+Terrestrial forest silhouettes should be rare or absent.
+
+The planet should look biologically rich from the waterline down, while exposed land can remain comparatively austere.
 
 ## Human adaptation
 
-Settlements rely on maritime/air logistics:
+Human settlements should visibly depend on air/sea logistics and sheltered geology.
 
-- cliff anchors;
-- floating industrial platforms;
-- storm-sheltered hangars;
-- tidal energy systems;
-- desalination and mineral extraction;
-- vertical lifts between waterline and high structures;
-- emergency landing shelves cut into rock.
+Facilities use:
+
+- cliff anchors rather than broad flat foundations;
+- recessed hangars above storm-surge height;
+- floating or semi-floating industrial platforms in protected basins;
+- vertical lifts between waterline, service levels and high habitation;
+- enclosed bridges between rock spines;
+- tidal/current energy systems;
+- desalination and mineral extraction infrastructure;
+- heavy corrosion/spray protection;
+- breakwaters or natural caldera walls wherever available;
+- emergency landing shelves cut into vertical terrain;
+- beacon chains over open ocean and through mist.
+
+A generic settlement placed on a sandy beach is a failure state.
 
 ## Ship-scale gameplay
 
-Thalassa should make low-altitude flight visually different from land worlds:
+Thalassa should create a very different kind of low-altitude flight:
 
-- weaving between island spines;
-- flying through sea arches;
-- approaching platforms during storms;
-- searching coastlines for hidden cavern entrances;
-- following beacon chains over open water;
-- entering flooded calderas with concealed facilities.
+- long over-water approaches with few visual references;
+- weaving between tall island spines;
+- passing through enormous sea arches;
+- flying inside open caldera rings;
+- following cliff faces to locate recessed hangars;
+- using lee-side routes during storms;
+- searching coastlines for hidden cave entrances;
+- navigating beacon chains when low cloud hides terrain;
+- pirate ambushes from cavities in broken cliff systems.
+
+Open ocean should deliberately create moments of scale and exposure between dense island encounters.
 
 ## Signature location — The Drowned Crown
 
-A partially collapsed volcanic ring forms a huge flooded basin open to the sea through several narrow cuts. An old extraction station occupies the inner cliffs, while a pirate group uses submerged/hidden access tunnels and a concealed ship hangar behind a waterfall-like mineral curtain.
+A huge volcanic caldera ring has partially collapsed into the sea.
+
+The remaining rim forms several tall, disconnected basalt/mineral spines around a flooded central basin. Narrow breaches connect the interior to open ocean.
+
+An old extraction and research station is attached to the inner cliff walls above storm-surge height. Parts of the facility descend to the waterline through vertical shafts and service lifts.
+
+A pirate group occupies abandoned flooded service tunnels and a concealed ship hangar hidden behind one broken section of the caldera wall.
+
+Approach sequence:
+
+```text
+open ocean
+-> distant caldera spines emerge from cloud
+-> beacon acquisition
+-> enter narrow sea breach
+-> fly inside flooded basin
+-> cliffside industrial structures appear
+-> storm/spray-shadow route beneath inner wall
+-> hidden hangar / landing shelf
+```
+
+The location should feel impossible to understand from a flat map but immediately legible when flown through.
+
+## Visual benchmark scene
+
+The first concept image should show:
+
+- a Starfield-like ship approaching a partially collapsed volcanic caldera from low altitude;
+- enormous narrow black rock spines rising almost directly from rough water;
+- at least one huge sea arch large enough for ship traversal;
+- heavy low cloud, spray and mist hiding parts of the coast;
+- a small cliff-anchored settlement inside the protected basin;
+- floating industrial elements that are subordinate to the geology;
+- no tropical beach visual language;
+- no palm-tree substitutes;
+- strong vertical relief and broad open-ocean negative space.
 
 ## Alienness target
 
-Thalassa may contain familiar water, clouds, and storms, but its landforms, ecology, and built environment should prevent it from reading like a holiday coast on Earth.
+Thalassa can use familiar water, rain and clouds. The alien quality should come from the scarcity and geometry of land, the concentration of life around vertical/tidal interfaces, and the way civilization must adapt to a planet where stable dry ground is rare.
+
+The desired reaction is:
+
+> I recognize an ocean, but I do not recognize this coastline as an Earth place.
+
+## Hard visual rules
+
+- no tropical-island shorthand;
+- no broad sandy beaches as the dominant coast;
+- no terrestrial forest canopy as a primary silhouette;
+- exposed land is steep, sparse and geologically young or heavily eroded;
+- ocean state must affect architecture and route design;
+- human structures favor cliffs, calderas, protected basins and vertical access;
+- alien ecology concentrates in marine/coastal zones rather than turning every island green;
+- open water is intentional negative space, not empty filler.
+
+## Implementation unknowns
+
+Later capability research should establish:
+
+- practical limits of large continuous water surfaces in Starfield;
+- wave/shore visual controls;
+- whether water-body geometry can support large custom calderas and channels;
+- low-altitude flight behavior over water;
+- fog/mist/weather localization around coasts;
+- ship collision and traversal through large sea arches/caves;
+- feasibility of floating platforms and moving/anchored maritime structures;
+- underwater/flooded interior support if used;
+- whether tidal variation is practical or should remain visual/static.
 
 ## Failure mode to avoid
 
-Do not rely on palm-tree substitutes, turquoise water, and dramatic sunsets as the main identity. The planet must remain distinctive in overcast grayscale conditions.
+If Thalassa could be sold as a luxury island destination on Earth after replacing the alien props, the concept has failed.
