@@ -16,22 +16,26 @@ from __future__ import annotations
 import argparse
 import json
 import mmap
-import os
 import struct
 import sys
 import zlib
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable, Iterator, Optional
+from typing import Iterator, Optional
 
 MAIN_HEADER_SIZE = 24
 GRUP_HEADER_SIZE = 24
 COMPRESSED_FLAG = 0x00040000
 
-_U16 = struct.Struct("<H")
 _U32 = struct.Struct("<I")
-_MAIN = struct.Struct("<4sIIIHH")  # sig, size, flags, formid, vc_info, form_version
-_GROUP = struct.Struct("<4sI4sIHH")  # sig, size, label, group_type, stamp, unknown
+# xEdit's wbRecordHeader() layout:
+# signature[4], data size u32, flags u32, FormID u32,
+# version-control-info-1[4], form version u16, version-control-info-2[2]
+_MAIN = struct.Struct("<4sIIIIHH")
+# Modern Bethesda GRUP header family: 24 bytes.
+# signature[4], group size u32, label[4], group type u32,
+# stamp u16, unknown u16, version u16, unknown2 u16
+_GROUP = struct.Struct("<4sI4sIHHHH")
 _SUB = struct.Struct("<4sH")
 
 
@@ -45,8 +49,9 @@ class RecordHeader:
     data_size: int
     flags: int
     form_id: int
-    vc_info: int
+    vc_info_1: int
     form_version: int
+    vc_info_2: int
     offset: int
     group_path: tuple[str, ...]
 
@@ -128,7 +133,16 @@ class PluginReader:
                 if end - pos < GRUP_HEADER_SIZE:
                     raise ProbeError(f"truncated GRUP header at 0x{pos:X}")
                 raw = data[pos : pos + GRUP_HEADER_SIZE]
-                _, group_size, label_raw, group_type, stamp, unknown = _GROUP.unpack(raw)
+                (
+                    _,
+                    group_size,
+                    label_raw,
+                    group_type,
+                    stamp,
+                    unknown,
+                    version,
+                    unknown2,
+                ) = _GROUP.unpack(raw)
                 if group_size < GRUP_HEADER_SIZE:
                     raise ProbeError(
                         f"invalid GRUP size {group_size} at 0x{pos:X}; smaller than header"
@@ -152,7 +166,15 @@ class PluginReader:
                 raise ProbeError(f"truncated record header at 0x{pos:X}")
 
             raw = data[pos : pos + MAIN_HEADER_SIZE]
-            sig_raw, size, flags, form_id, vc_info, form_version = _MAIN.unpack(raw)
+            (
+                sig_raw,
+                size,
+                flags,
+                form_id,
+                vc_info_1,
+                form_version,
+                vc_info_2,
+            ) = _MAIN.unpack(raw)
             signature = sig_raw.decode("ascii", errors="replace")
             payload_end = pos + MAIN_HEADER_SIZE + size
             if payload_end > end:
@@ -166,8 +188,9 @@ class PluginReader:
                 data_size=size,
                 flags=flags,
                 form_id=form_id,
-                vc_info=vc_info,
+                vc_info_1=vc_info_1,
                 form_version=form_version,
+                vc_info_2=vc_info_2,
                 offset=pos,
                 group_path=group_path,
             )
@@ -250,12 +273,9 @@ class PluginReader:
             )
 
     def edid(self, header: RecordHeader) -> Optional[str]:
-        try:
-            for sub in self.subrecords(header):
-                if sub.signature == "EDID":
-                    return sub.data.split(b"\x00", 1)[0].decode("utf-8", errors="replace")
-        except ProbeError:
-            raise
+        for subrecord in self.subrecords(header):
+            if subrecord.signature == "EDID":
+                return subrecord.data.split(b"\x00", 1)[0].decode("utf-8", errors="replace")
         return None
 
     def find_form_id(self, form_id: int) -> Optional[RecordHeader]:
@@ -329,16 +349,17 @@ def command_record(args: argparse.Namespace) -> int:
                 "offset": f"0x{header.offset:X}",
                 "data_size": header.data_size,
                 "form_version": header.form_version,
-                "vc_info": header.vc_info,
+                "vc_info_1": f"0x{header.vc_info_1:08X}",
+                "vc_info_2": f"0x{header.vc_info_2:04X}",
                 "group_path": list(header.group_path),
                 "edid": reader.edid(header),
                 "subrecords": [
                     {
-                        "signature": sub.signature,
-                        "size": sub.size,
-                        "offset": f"0x{sub.offset:X}",
+                        "signature": subrecord.signature,
+                        "size": subrecord.size,
+                        "offset": f"0x{subrecord.offset:X}",
                     }
-                    for sub in subs
+                    for subrecord in subs
                 ],
             },
         }
@@ -373,14 +394,14 @@ def command_dump_subrecords(args: argparse.Namespace) -> int:
             print(f"FormID {args.form_id:08X} not found", file=sys.stderr)
             return 2
         rows = []
-        for sub in reader.subrecords(header):
+        for subrecord in reader.subrecords(header):
             row: dict[str, object] = {
-                "signature": sub.signature,
-                "size": sub.size,
-                "offset": f"0x{sub.offset:X}",
+                "signature": subrecord.signature,
+                "size": subrecord.size,
+                "offset": f"0x{subrecord.offset:X}",
             }
             if args.hex:
-                row["hex"] = sub.data.hex()
+                row["hex"] = subrecord.data.hex()
             rows.append(row)
         print(
             json.dumps(
