@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import importlib.util
 import struct
+import sys
 import tempfile
 import unittest
 import zlib
@@ -13,6 +14,7 @@ HERE = Path(__file__).resolve().parent
 SPEC = importlib.util.spec_from_file_location("sfprobe", HERE / "sfprobe.py")
 assert SPEC and SPEC.loader
 sfprobe = importlib.util.module_from_spec(SPEC)
+sys.modules[SPEC.name] = sfprobe
 SPEC.loader.exec_module(sfprobe)
 
 
@@ -43,13 +45,14 @@ def record(
         encoded = payload
     return (
         struct.pack(
-            "<4sIIIHH",
+            "<4sIIIIHH",
             sig,
             len(encoded),
             flags,
             form_id,
             0,
             form_version,
+            0,
         )
         + encoded
     )
@@ -57,7 +60,20 @@ def record(
 
 def group(label: bytes, group_type: int, body: bytes) -> bytes:
     size = sfprobe.GRUP_HEADER_SIZE + len(body)
-    return struct.pack("<4sI4sIHH", b"GRUP", size, label, group_type, 0, 0) + body
+    return (
+        struct.pack(
+            "<4sI4sIHHHH",
+            b"GRUP",
+            size,
+            label,
+            group_type,
+            0,
+            0,
+            0,
+            0,
+        )
+        + body
+    )
 
 
 class SfProbeTests(unittest.TestCase):
@@ -120,7 +136,7 @@ class SfProbeTests(unittest.TestCase):
             self.assertEqual(rows[1].data, payload_data)
 
     def test_invalid_record_bounds_fail_closed(self) -> None:
-        bad = struct.pack("<4sIIIHH", b"PNDT", 1000, 0, 1, 0, 1) + b"tiny"
+        bad = struct.pack("<4sIIIIHH", b"PNDT", 1000, 0, 1, 0, 1, 0) + b"tiny"
         path = self.write_fixture(bad)
         with sfprobe.PluginReader(path) as reader:
             with self.assertRaises(sfprobe.ProbeError):
