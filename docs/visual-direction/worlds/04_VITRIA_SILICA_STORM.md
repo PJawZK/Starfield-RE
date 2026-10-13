@@ -8,6 +8,10 @@ Vitria is the third visual pillar after Khepri and Pelagos. Its job is to prove 
 
 It should look as though the atmosphere has been sculpting the planet in one dominant direction for geological time.
 
+## One-sentence pitch
+
+Vitria is a dry mineral world where long-lived abrasive winds have carved the surface into aligned blade fields and protected troughs, while electrically charged silica storms arrive as violent moving fronts that later settle into powerful directional flow and turn terrain shelter into a core part of flight and survival.
+
 ## Physical baseline
 
 Vitria is a dry, mineral-rich terrestrial planet with a substantial but hostile atmosphere.
@@ -82,20 +86,106 @@ Use mineralogy more structurally:
 
 Any apparent liquid-like streak must instead read as solid mineral deposition, dust accumulation, melt/fusion associated with localized heat, or another physically justified process.
 
-## Weather
+## Storm system
 
-Storms are not merely visual filters. They are one of the forces that made the world.
+Vitria's storms are moving environmental events rather than binary weather filters.
 
-A storm front should appear as an advancing wall of particulate atmosphere with embedded electrical discharge, rapidly changing visibility and surface contrast.
+The defining storm has three phases.
 
-Wind direction matters for:
+### Phase 1 — Incoming wall
 
-- shelter;
-- navigation;
-- landing approach;
-- exposure hazards;
-- visibility;
-- exterior equipment placement.
+A dense advancing particulate front is visible at long range.
+
+Before arrival:
+
+- horizon contrast collapses progressively behind the wall;
+- distant electrical discharges become visible inside the front;
+- wind speed rises steadily;
+- surface dust begins to stream in the prevailing direction;
+- loose particulate matter lifts from exposed ridges;
+- sensor reliability begins to fall before visual conditions become severe;
+- settlements activate beacons, shutters and exposed-equipment protection;
+- the player has enough warning to seek terrain shelter, land, or deliberately continue.
+
+The storm should create anticipation before danger.
+
+### Phase 2 — Front impact
+
+The leading edge is the most turbulent and chaotic period.
+
+Desired effects:
+
+- abrupt gusts changing magnitude and local direction;
+- strong rotational and lateral turbulence around ridges;
+- severe temporary visibility loss;
+- dense abrasive particles moving predominantly sideways;
+- intense electrostatic activity and intermittent lightning;
+- degraded target locks and sensor returns;
+- hazardous exposure above ridges and in open basins;
+- difficult landing unless inside a protected lee corridor.
+
+For flight, the actual ship should eventually receive physical translational and rotational disturbance rather than relying only on camera shake.
+
+A conceptual force model is:
+
+```text
+prevailing wind
++ moving-front pressure change
++ local gust/turbulence field
++ terrain exposure/shelter
+= ship disturbance
+```
+
+The front impact should be dramatic but temporary.
+
+### Phase 3 — Established flow
+
+After the wall passes, the storm becomes more organized.
+
+Conditions remain severe, but the challenge changes:
+
+- wind direction stabilizes around the regional prevailing flow;
+- gusts become less chaotic;
+- visibility remains limited but less violently variable;
+- particulate flow aligns strongly with terrain channels;
+- lee zones become predictably safer;
+- ridge crests remain highly exposed;
+- navigation can increasingly use terrain alignment even when sensors remain degraded.
+
+This phase can last much longer than the impact event.
+
+The player should learn that Vitria's terrain is effectively a wind map.
+
+## Terrain interaction with weather
+
+The storm must react conceptually to topography.
+
+Key behaviors:
+
+- windward ridge faces experience maximum exposure and abrasion;
+- ridge crests produce turbulence and unstable flow;
+- deep lee corridors reduce direct wind load;
+- some slots accelerate the flow like natural wind tunnels;
+- protected basins accumulate fine material;
+- recessed hangars and settlements occupy predictable shelter zones.
+
+Even if the engine initially requires approximation, the design target is that terrain shelter matters mechanically as well as visually.
+
+## Sensors and combat
+
+Storm effects should degrade confidence rather than simply disable systems.
+
+Potential effects:
+
+- shorter reliable sensor range;
+- intermittent contacts;
+- slower or unstable target lock;
+- missile/target tracking penalties;
+- navigation beacon dropout during the impact phase;
+- contacts emerging visually from dust at short range;
+- terrain masking becoming especially valuable.
+
+Storm combat should feel like fighting both an opponent and an environment whose major rules are learnable.
 
 ## Ecology
 
@@ -125,23 +215,31 @@ Facilities use:
 - abrasion-resistant outer plating;
 - protected intakes and radiator geometry;
 - sensor masts placed only where exposure is worth the damage;
-- landing corridors aligned with local terrain and prevailing wind.
+- landing corridors aligned with local terrain and prevailing wind;
+- storm beacons positioned sequentially through safe approach corridors;
+- replaceable exposed panels and visibly eroded sacrificial structures.
 
 A base placed openly on a flat pad with no environmental adaptation is a design failure.
 
 ## Ship-scale gameplay
 
-Directional geology naturally generates readable flight routes:
+Directional geology and the three-stage storm cycle create distinct flight decisions.
+
+Potential experiences:
 
 - high-speed runs along kilometer-scale troughs;
 - slalom routes between fins;
 - sheltered passages beneath undercut ridges;
-- dangerous crossings above exposed ridge crests;
-- lee-side landing approaches during storms;
-- hidden facilities visible only from the protected side;
-- terrain navigation remaining possible when sensors degrade.
+- dangerous shortcuts over exposed ridge crests;
+- racing an incoming storm wall toward a protected installation;
+- struggling through violent front-impact turbulence;
+- flying established linear flow after the front passes;
+- using lee corridors to reduce disturbance;
+- losing and reacquiring sensor contacts inside the dust;
+- terrain-guided navigation when instruments degrade;
+- storm combat in which route choice matters as much as raw maneuverability.
 
-The world should visually invite the player to follow the terrain.
+The world should visually invite the player to follow the terrain and mechanically reward understanding why that terrain exists.
 
 ## Signature location — Glass Maw
 
@@ -150,6 +248,12 @@ Glass Maw is a huge wind-excavated slot between two exceptionally resistant mine
 A mining and processing installation occupies the protected lee interior. Surface structures are expendable and heavily abraded; the valuable complex, hangars and habitation are buried deeply into the rock.
 
 The main ship entrance cannot be approached safely head-on during severe weather. The normal route follows a long protected trough before turning sharply into the slot.
+
+A flagship encounter could begin with the player seeing a storm wall approaching while still outside the channel, forcing a decision between:
+
+- taking the longer sheltered approach;
+- attempting the exposed shortcut before the front arrives;
+- entering the front deliberately and fighting through the turbulent impact zone.
 
 This makes geology, weather, architecture and flight part of the same encounter.
 
@@ -160,10 +264,28 @@ The first concept image should show:
 - a Starfield-like ship flying low along the lee side of a giant mineral ridge;
 - many kilometer-scale parallel fins receding toward the horizon;
 - clearly asymmetric windward and lee faces;
-- a dust wall advancing in the distance;
+- a massive dust wall advancing in the distance;
+- electrical activity embedded inside the wall;
 - mineral seams catching diffuse light without becoming a crystal forest;
 - a small recessed industrial facility hidden within one sheltered slot;
 - strong directional composition so the wind history is obvious before weather effects are considered.
+
+## Technical research targets
+
+The visual target should be preserved even if implementation requires approximation.
+
+Research later should establish:
+
+- how spatially localized Starfield weather can be;
+- whether a moving storm wall can be represented independently of the active local WTHR state;
+- whether large world-space VFX can convincingly mark the front position;
+- how wind/turbulence values can be exposed to gameplay systems;
+- whether terrain shelter can be approximated from geometry, zones, handcrafted volumes or native ray/position tests;
+- how ship translational/rotational disturbance can be added safely during atmospheric flight;
+- which sensor/targeting systems can be degraded without breaking combat state;
+- how weather transitions synchronize with audio, particles, lighting and gameplay state.
+
+These remain capability questions rather than reasons to weaken the design target now.
 
 ## Alienness target
 
@@ -173,12 +295,18 @@ The desired reaction is:
 
 > This looks like a process I understand, operating on materials and at a scale I have never seen before.
 
-## Failure modes to avoid
+## Hard visual and physical rules
 
-- generic giant-crystal biome;
-- randomly oriented rock spires;
-- fantasy glass mountains with no erosion logic;
-- permanent glowing surfaces as the primary identity;
-- fluids where pressure/temperature/chemistry do not support them;
-- storm effects used to conceal otherwise generic terrain;
-- human structures ignoring the wind regime.
+- no generic giant-crystal biome;
+- no randomly oriented rock spires;
+- no fantasy glass mountains with no erosion logic;
+- no permanent glowing surfaces as the primary identity;
+- no fluids where pressure/temperature/chemistry do not support them;
+- no storm effects used to conceal otherwise generic terrain;
+- human structures must visibly respond to the wind regime;
+- terrain alignment must remain legible in clear weather;
+- the front is the most turbulent period; the storm behind it becomes more directional and learnable.
+
+## Failure mode to avoid
+
+If the storm is only reduced visibility plus camera shake, or if the terrain stops mattering once the storm begins, Vitria has failed its main gameplay premise.
