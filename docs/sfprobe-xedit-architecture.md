@@ -90,6 +90,22 @@ xEdit's current Starfield definition exposes `PNDT` (`Planet`) with the followin
 
 This is directly relevant to tracing generated/edited planetary surface worldspaces.
 
+### xEdit post-load normalization of CNAM/EOVR
+
+`PNDT` uses xEdit's `wbPNDTAfterLoad` callback. This callback is presentation/normalization logic rather than a reinterpretation of the planet's physical fields.
+
+Observed behavior:
+
+- for a master record, xEdit ensures `CNAM` exists, removes `CNAM` entries whose worldspace FormID is zero, and removes `EOVR`
+- for an override record, xEdit ensures `EOVR` exists, removes `EOVR` entries whose worldspace FormID is zero, and removes `CNAM`
+
+Therefore `sfprobe` should keep two concepts separate:
+
+1. **raw view** — exactly which subrecords and bytes are present on disk
+2. **normalized view** — optional xEdit-equivalent interpretation for comparison
+
+The raw view is authoritative for reverse engineering. Normalization must never silently erase evidence from the raw report.
+
 ### Biomes
 
 `PPBD` entries expose:
@@ -219,7 +235,15 @@ The phase-0 core should stay deliberately simple.
 - source offset
 - group path
 
-Starfield uses a 24-byte main-record structure according to xEdit's current `wbDefinitionsSF1.pas` initialization.
+Starfield uses a 24-byte main-record structure according to xEdit's current `wbDefinitionsSF1.pas` initialization. xEdit's common `wbRecordHeader()` definition expands that as:
+
+- signature — 4 bytes
+- data size — u32
+- flags — u32
+- FormID — u32
+- version-control info 1 — 4 bytes
+- form version — u16
+- version-control info 2 — 2 bytes
 
 ### Subrecord
 
@@ -395,7 +419,7 @@ The first writer should target a disposable generated test plugin, never `Starfi
 
 ## Immediate next step
 
-Implement and test the generic read-only scanner against the user's current installed `Starfield.esm`.
+Test the generic read-only scanner against the user's current installed `Starfield.esm`.
 
 Required first local command once the game files are available:
 
